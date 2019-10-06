@@ -19,8 +19,12 @@ class ApplicationController < ActionController::API
   end
 
   def authorize_request
-    @current_user = AuthorizeRequest.run(request.instance_values).result
-    response_hash = { success: false, errors: { auth: 'Not Authorized' } }
-    render json: response_hash, status: 401 unless @current_user
+    outcome = AuthorizeRequest.run(token: request.headers['Authorization'])
+    if outcome.success?
+      @current_user = outcome.result
+    else
+      response_hash = { success: false, errors: outcome.errors.message }
+      render json: response_hash, status: 401
+    end
   end
 end

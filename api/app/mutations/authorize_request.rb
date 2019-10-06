@@ -1,24 +1,16 @@
 class AuthorizeRequest < Mutations::Command
   required do
-    hash :headers
+    string :token
   end
 
   def execute
-    user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-    user || errors.add(:token, 'Invalid token') && nil
+    user = User.find(decoded_auth_token[:user_id]) if decoded_auth_token
+    user || add_error(:token, :invalid_token, 'Invalid token')
   end
 
   private
 
   def decoded_auth_token
-    JsonWebToken.decode(http_auth_header)
-  end
-
-  def http_auth_header
-    authorization = headers['Authorization']
-    return authorization.split(' ').last if authorization.present?
-
-    errors.add(:token, 'Missing token')
-    nil
+    JsonWebToken.decode(token.split(' ').last)
   end
 end

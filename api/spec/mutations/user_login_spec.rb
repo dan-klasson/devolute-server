@@ -1,7 +1,5 @@
 RSpec.describe 'UserLogin' do
-  before(:each) do
-    @user = User.create!(params)
-  end
+  before(:each) { @user = create(:user) }
   let(:params) do
     {
       email: 'dan@example.com',

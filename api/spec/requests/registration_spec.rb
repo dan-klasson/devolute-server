@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'Registration', type: :request do
   it 'successfully creates a new user' do
     post '/registration', params: {
