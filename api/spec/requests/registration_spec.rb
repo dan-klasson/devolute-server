@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Registration', type: :request do
   it 'successfully creates a new user' do
-    post '/registrations', params: {
+    post '/registration', params: {
       name: 'Daniel',
       email: 'dan@example.com',
       password: 'hax0r'
@@ -12,7 +12,7 @@ RSpec.describe 'Registration', type: :request do
   end
 
   it 'fails at creating new user' do
-    post '/registrations'
+    post '/registration'
     body = JSON.parse(response.body)
     expect(body['success']).to eq false
     expect(body['errors']['name']).to eq 'Name is required'
