@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
   def json_response(outcome)
     if outcome.success?
-      render json: { success: true }, status: 200
+      render json: { success: true, result: outcome.result }, status: 200
     else
       errors = outcome.errors.message
       render json: { success: false, errors: errors }, status: 422

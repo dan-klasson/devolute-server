@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'UserSignup' do
   let(:params) do
     {
