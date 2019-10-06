@@ -41,6 +41,8 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  include ActionDispatch::TestProcess
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -63,6 +65,11 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  # remove uploaded files
+  config.after(:all) do
+    FileUtils.rm_rf(Rails.root.join('tmp', 'storage_test'))
   end
 
   # RSpec Rails can automatically mix in different behaviours to your tests

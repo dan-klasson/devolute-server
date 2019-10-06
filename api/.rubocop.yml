@@ -11,6 +11,8 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
+Style/MutableConstant:
+  Enabled: false
 Metrics/BlockLength:
   ExcludedMethods: ['describe', 'context']
   Exclude:
