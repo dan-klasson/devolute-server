@@ -1,7 +1,6 @@
 class UserSignup < Mutations::Command
   required do
     string :email, matches: /^.+@.+$/
-    string :name
     string :password
   end
 

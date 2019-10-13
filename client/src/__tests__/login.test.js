@@ -14,9 +14,9 @@ test('successfully logs the user in', async () => {
   })
   const { getByText, getByLabelText, } = render(
     <Router>
-      <Login/>
+      <Login />
       <Switch>
-        <Route path="/">logged out</Route>
+        <Route path="/">logged in</Route>
       </Switch>
     </Router>
   )
@@ -25,7 +25,7 @@ test('successfully logs the user in', async () => {
   fireEvent.change(getByLabelText(/password/i), {target: {value: 'password1234'}})
   fireEvent.click(getByText(/submit/i))
 
-  await waitForElement(() => getByText(/logged out/i))
+  await waitForElement(() => getByText(/logged in/i))
 })
 
 test('fails at validation', async () => {

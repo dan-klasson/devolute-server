@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import  { Redirect } from 'react-router-dom'
-import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
@@ -16,17 +16,24 @@ const schema = object({
   password: string()
     .min(6, 'Password has to be longer than 6 characters!')
     .required('Password is required!'),
+  password_repeat: string()
+    .min(6, 'Password confirm has to be longer than 6 characters!')
+    .required('Password confirm is required!')
+    .test('passwords-match', 'Passwords must match', function(value) {
+      return this.parent.password === value;
+    }),
 })
 
-export default function Login() {
-  const [response, submitData] = useSubmitData({endpoint: 'authentication'})
-  const [cookies, setCookie] = useCookies(['authtoken'])
+export default function Register() {
+  const [response, submitData] = useSubmitData({endpoint: 'registration'})
+  const [cookies, setCookie] = useCookies(['authtoken']);
+  const handleRegister = (data) => submitData(data)
 
-  const handleLogin = (data) => submitData(data)
-
-  if(response.data) {
-    setCookie('authtoken', response.data)
-  }
+  useEffect(() => {
+    if(response.data) {
+      setCookie('authtoken', response.data)
+    }
+  })
 
   if(cookies.authtoken) {
     return <Redirect to="/" />
@@ -35,7 +42,7 @@ export default function Login() {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={handleLogin}
+      onSubmit={handleRegister}
     >
       {({
         handleSubmit,
@@ -62,8 +69,17 @@ export default function Login() {
             errors={errors}
             touched={touched}
           />
+          <FormField
+            name="password_repeat"
+            label="Password confirm"
+            type="password"
+            placeholder="Re-enter Password"
+            handleChange={handleChange}
+            errors={errors}
+            touched={touched}
+          />
           {response.error ? (
-            <Alert variant="danger" data-testid="invalid-login">
+            <Alert variant="danger">
               {response.error.user_authentication}
             </Alert>) : null}
           <Button variant="primary" type="submit">

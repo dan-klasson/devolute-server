@@ -5,7 +5,9 @@ import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import Login from './login'
 import Logout from './logout'
+import Register from './register'
 import Image from './image'
+import UploadImage from './uploadImage'
 
 export default function Header() {
   const [cookies] = useCookies(['authtoken']);
@@ -19,9 +21,13 @@ export default function Header() {
             {!cookies.authtoken ? 
               <>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                <Nav.Link href="#signup">Register</Nav.Link>
+                <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
-            : <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+            : 
+              <>
+              <Nav.Link as={Link} to="/upload">Upload Image</Nav.Link>
+              <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+              </>
             }
           </Nav>
         </Navbar.Collapse>
@@ -32,6 +38,12 @@ export default function Header() {
         </Route>
         <Route path="/logout">
           <Logout/>
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/upload">
+          <UploadImage />
         </Route>
         <Route path="/">
           <Image/>
