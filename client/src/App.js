@@ -1,11 +1,14 @@
 import React from 'react'
+import { CookiesProvider } from 'react-cookie';
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Header from './header'
 
 function App() {
   return (
-    <Header />
+    <CookiesProvider>
+      <Header />
+    </CookiesProvider>
   )
 }
 
