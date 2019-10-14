@@ -1,24 +1,20 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Dependencies
 
-Things you may want to cover:
+Install GraphicsMagick
 
-* Ruby version
+### Ubuntu
 
-* System dependencies
+    sudo apt install graphicsmagick
 
-* Configuration
+### Mac
 
-* Database creation
+    brew install graphicsmagick
+    
+## Environment variables
 
-* Database initialization
+Rename `config/local_env.example.yml` to `config/local_env.yml` and update accordingly.
 
-* How to run the test suite
+## Install
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run `bundle` to install gems.
