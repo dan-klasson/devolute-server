@@ -9,7 +9,7 @@ RSpec.describe 'UserLogin' do
 
   it 'succesfully logs the user in' do
     outcome = UserLogin.run(params)
-    token = JsonWebToken.encode(user_id: @user.id)
+    token = JsonWebToken.encode(params)
     expect(outcome.success?).to eq(true)
     expect(outcome.result).to eq(token)
   end

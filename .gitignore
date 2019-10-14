@@ -33,3 +33,6 @@
 
 # mac system files
 *.DS_Store
+
+# rails conf
+config/local_env.yml

@@ -5,6 +5,6 @@ class ImagesController < ApplicationController
   end
 
   def create
-    json_response ImageUpload.run(params.merge(user: current_user))
+    json_response ImageUpload.run(params.merge(user: @current_user))
   end
 end

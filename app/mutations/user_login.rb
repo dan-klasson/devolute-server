@@ -5,7 +5,8 @@ class UserLogin < Mutations::Command
   end
 
   def execute
-    JsonWebToken.encode(user_id: user.id) if user
+    payload = { email: inputs[:email], password: inputs[:password] }
+    JsonWebToken.encode(payload) if user
   end
 
   private

@@ -19,7 +19,7 @@ require 'pry'
 
 RSpec.shared_context "Global helpers" do
   let(:user) { create(:user) }
-  let(:token) { JsonWebToken.encode(user_id: user.id) }
+  let(:token) { JsonWebToken.encode(email: user.email, password: user.password) }
   let(:auth_headers) { { 'Authorization': "Bearer #{token}" } }
 end
 

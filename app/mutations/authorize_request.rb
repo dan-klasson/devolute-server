@@ -5,7 +5,7 @@ class AuthorizeRequest < Mutations::Command
 
   def execute
     decoded = JsonWebToken.decode(token.split(' ').last)
-    user = User.where(email: decoded[:email]) if decoded
+    user = User.where(email: decoded[:email]).first if decoded
     user || add_error(:token, :invalid_token, 'Invalid token')
   end
 end

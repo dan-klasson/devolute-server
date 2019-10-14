@@ -12,7 +12,7 @@ RSpec.describe 'Authenticate', type: :request do
   it 'is successful' do
     post '/authentication', params: params
     body = JSON.parse(response.body)
-    token = JsonWebToken.encode(user_id: @user.id)
+    token = JsonWebToken.encode(params)
     expect(body['success']).to eq true
     expect(body['result']).to eq token
   end
