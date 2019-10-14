@@ -1,4 +1,5 @@
 RSpec.describe 'UserSignup' do
+  before(:each) { @user = create(:user) }
   let(:params) do
     {
       email: 'dan@example.com',
@@ -8,8 +9,9 @@ RSpec.describe 'UserSignup' do
 
   it 'signs the user up' do
     outcome = UserSignup.run(params)
+    token = JsonWebToken.encode(params)
     expect(outcome.success?).to eq(true)
-    expect(outcome.result).to eq(User.first)
+    expect(outcome.result).to eq(token)
   end
 
   it 'validates correct email' do

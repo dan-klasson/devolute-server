@@ -5,6 +5,10 @@ class UserSignup < Mutations::Command
   end
 
   def execute
-    User.create!(inputs)
+    user = User.create!(inputs)
+    payload = { email: inputs[:email], password: inputs[:password] }
+    return JsonWebToken.encode(payload) if user
+
+    nil
   end
 end
