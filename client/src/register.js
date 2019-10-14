@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'

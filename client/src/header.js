@@ -7,7 +7,6 @@ import Login from './login'
 import Logout from './logout'
 import Register from './register'
 import Image from './image'
-import UploadImage from './uploadImage'
 
 export default function Header() {
   const [cookies] = useCookies(['authtoken']);
@@ -25,7 +24,7 @@ export default function Header() {
               </>
             : 
               <>
-              <Nav.Link as={Link} to="/upload">Upload Image</Nav.Link>
+              <Nav.Link as={Link} to="/">Images</Nav.Link>
               <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
               </>
             }
@@ -41,9 +40,6 @@ export default function Header() {
         </Route>
         <Route path="/register">
           <Register />
-        </Route>
-        <Route path="/upload">
-          <UploadImage />
         </Route>
         <Route path="/">
           <Image/>
